@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      pixel-forest-with-lots-of-trees-2496098_0: -3241859785916029182
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
