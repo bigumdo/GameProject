@@ -6,5 +6,6 @@ namespace BGD.Enemies
     public class Enemy : Agent
     {
         
+
     }
 }
