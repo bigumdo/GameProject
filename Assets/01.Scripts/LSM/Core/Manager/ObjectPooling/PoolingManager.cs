@@ -13,20 +13,20 @@ namespace BGD.ObjectPool
 
         private void Awake()
         {
-            foreach (PoolingSetting item in listSO.datas)
+            foreach (PoolingDataSO item in listSO.datas)
             {
                 CreatePool(item);
             }
         }
 
-        private void CreatePool(PoolingSetting item)
+        private void CreatePool(PoolingDataSO item)
         {
             var pool = new Pool(item.prefab, item.typeName, transform, item.poolingSettingCnt);
             _pools.Add(item.prefab.type, pool);
         }
 
 
-        public IPoolableObject Pop(string type)
+        public IPoolable Pop(string type)
         {
             if (_pools.ContainsKey(type) == false)
             {
@@ -34,12 +34,12 @@ namespace BGD.ObjectPool
                 return null;
             }
 
-            IPoolableObject item = _pools[type].Pop();
+            IPoolable item = _pools[type].Pop();
             item.ResetObj();
             return item;
         }
 
-        public void Push(IPoolableObject obj, bool resetParent = false)
+        public void Push(IPoolable obj, bool resetParent = false)
         {
             if (resetParent)
                 obj.prefabObj.transform.SetParent(transform);

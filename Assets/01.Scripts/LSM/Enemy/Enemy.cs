@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace BGD.Agents.Enemies
 {
-    public class Enemy : Agent, IPoolableObject
+    public class Enemy : Agent, IPoolable
     {
 
         [SerializeField]private AgentStateListSO _states;

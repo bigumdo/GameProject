@@ -6,13 +6,13 @@ namespace BGD
 {
     public class Pool
     {
-        private Queue<IPoolableObject> _pool = new Queue<IPoolableObject>();
-        private IPoolableObject _prefab;
+        private Queue<IPoolable> _pool = new Queue<IPoolable>();
+        private IPoolable _prefab;
         private Transform _parent;
 
         private string _type;
 
-        public Pool(IPoolableObject prefab, string type, Transform parent, int count)
+        public Pool(IPoolable prefab, string type, Transform parent, int count)
         {
             _prefab = prefab;
             _type = type;
@@ -23,22 +23,22 @@ namespace BGD
                 GameObject obj = GameObject.Instantiate(_prefab.prefabObj, _parent);
                 obj.gameObject.name = _type.ToString();
                 obj.gameObject.SetActive(false);
-                IPoolableObject poolObj = obj.GetComponent<IPoolableObject>();
+                IPoolable poolObj = obj.GetComponent<IPoolable>();
                 poolObj.type = _type;
                 _pool.Enqueue(poolObj);
             }
         }
 
 
-        public IPoolableObject Pop()
+        public IPoolable Pop()
         {
-            IPoolableObject poolObj;
+            IPoolable poolObj;
             GameObject obj = null;
             if (_pool.Count <= 0)
             {
                 obj = GameObject.Instantiate(_prefab.prefabObj, _parent);
                 obj.gameObject.name = _type.ToString();
-                poolObj = obj.GetComponent<IPoolableObject>();
+                poolObj = obj.GetComponent<IPoolable>();
                 poolObj.type = _type;
             }
             else
@@ -49,7 +49,7 @@ namespace BGD
             return poolObj;
         }
 
-        public void Push(IPoolableObject obj)
+        public void Push(IPoolable obj)
         {
             obj.prefabObj.SetActive(false);
             _pool.Enqueue(obj);

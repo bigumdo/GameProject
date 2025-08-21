@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace BGD.ObjectPool
 {
-    public interface IPoolableObject
+    public interface IPoolable
     {
         [SerializeField] public string type { get; set; }
         public GameObject prefabObj { get; }
