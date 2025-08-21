@@ -1,25 +1,30 @@
 using BGD.Agents;
 using BGD.FSM;
+using BGD.ObjectPool;
 using UnityEngine;
 
 namespace BGD.Agents.Enemies
 {
-    public class Enemy : Agent
+    public class Enemy : Agent, IPoolableObject
     {
 
         [SerializeField]private AgentStateListSO _states;
         private StateMachine _stateMachine;
 
-        protected override void Awake()
-        {
-            base.Awake();
-            _stateMachine = new StateMachine(this, _states);
-        }
+        [field:SerializeField] public string type { get; set; }
+
+        public GameObject prefabObj => gameObject;
 
         protected override void InitComponent()
         {
             base.InitComponent();
-            _stateMachine.Initialize("Idle");
+            _stateMachine = new StateMachine(this, _states);
+        }
+
+        protected override void AfterInitComponent()
+        {
+            base.AfterInitComponent();
+            _stateMachine.Initialize("EnemyIdle");
         }
 
         public void ChangeState(string stateName)
@@ -30,6 +35,17 @@ namespace BGD.Agents.Enemies
         private void Update()
         {
             _stateMachine.currentState.Update();
+        }
+
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            
+        }
+
+        public void ResetObj()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

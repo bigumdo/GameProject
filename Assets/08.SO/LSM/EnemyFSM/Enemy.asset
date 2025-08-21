@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Enemy
   m_EditorClassIdentifier: 
   states:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 9f119f611e5b8b34e9f5cb10a9acb4b3, type: 2}
+  - {fileID: 11400000, guid: c6f4d85f8db36cb41a9538400314156a, type: 2}
+  - {fileID: 11400000, guid: d0e9bf88058ae35478e3861f18177e89, type: 2}

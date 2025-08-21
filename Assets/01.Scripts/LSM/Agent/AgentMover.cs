@@ -16,7 +16,7 @@ namespace BGD.Agents
         public void Initialize(Agent agent)
         {
             _agent = agent;
-            _rbCompo = GetComponent<Rigidbody2D>();
+            _rbCompo = GetComponentInParent<Rigidbody2D>();
         }
 
         public void AfterInitialize()
@@ -59,5 +59,6 @@ namespace BGD.Agents
                 _rbCompo.linearVelocity = _movement * _speed;
             }
         }
+
     }
 }

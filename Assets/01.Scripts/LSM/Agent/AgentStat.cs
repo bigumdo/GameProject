@@ -1,10 +1,12 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace BGD.Agents
 {
+    [Serializable]
     public struct StatData
     {
         public delegate void ValueChangeHandler(StatData statData, float changeValue);
@@ -28,7 +30,7 @@ namespace BGD.Agents
         }
     }
 
-    public class AgentStat : MonoBehaviour, IAgentComponent, IAfterInit
+    public class AgentStat : MonoBehaviour, IAgentComponent
     {
         [SerializeField] private List<StatData> _statDatas;
 
@@ -39,9 +41,6 @@ namespace BGD.Agents
         {
             _agent = agent;
             _statDataDictionary = new Dictionary<string, StatData>();
-        }
-        public void AfterInitialize()
-        {
             _statDatas.ForEach(x => _statDataDictionary.Add(x.statName, x));
         }
 

@@ -15,6 +15,7 @@ namespace BGD.Agents.Enemies
         public override void Enter()
         {
             base.Enter();
+            _enemy.ChangeState("EnemyMove");
         }
 
         public override void Update()
