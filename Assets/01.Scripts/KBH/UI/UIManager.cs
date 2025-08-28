@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using DG.Tweening;
+using System.Collections;
 
 
 public static class SpanHelper
@@ -71,12 +72,15 @@ namespace Kbh
         [SerializeField] private float _wavePanelShowTime;
         private Image[] _waveImgList;
         private Sequence _wavePanelShowSeq;
-        
+
 
 
         [Header("Setting UI Button")]
         [SerializeField] private Button _settingUIBtn;
         [SerializeField] private SettingUI _settingUIPanel;
+
+        [Header("Status UI")]
+        [SerializeField] private StatusUI _statusUIPanel;
 
 
         [Header("Background Visual")]
@@ -96,6 +100,8 @@ namespace Kbh
         [SerializeField] private Ease _aircraftPositionVisualEase = Ease.Linear;
         private Image[] _aircraftPositionVisualArr = null;
         private Sequence _aircraftPositionFadeSeq = null;
+        public IEnumerable GetAircraftPositionTrms() => _aircraftPositionVisualParent;
+        public int GetAircraftPositionCount() => _aircraftPositionVisualParent.childCount;
 
 
         [Header("Wave boss Warning UI")]
@@ -105,7 +111,7 @@ namespace Kbh
         private Sequence _bossWarningSeq;
 
 
-        private void Awake()
+        public void Init()
         {
             _hpGaugeImg = _hpGaugeTrm.GetComponent<Image>();
             _hpGaugeStartSize = _hpGaugeImg.rectTransform.sizeDelta;
@@ -140,12 +146,21 @@ namespace Kbh
             // background UI Image scroll
         }
 
+        #region SUB_UIPANEL
 
         private void HandleSettingUIBtnClick()
         {
             _settingUIPanel.Open();
         }
 
+        public void OpenStatusPanel(/* 여기에 aircraft 정보를 넘겨줘야 한다. */)
+        {
+            
+        }
+        #endregion
+
+
+        #region RESOURCE_UPDATE
         public void SetGold(int value, int maxValue)
         {
             _goldResource.textMesh.SetText($"{value}/{maxValue}");
@@ -192,9 +207,9 @@ namespace Kbh
 
             _previousHpGaugePercent = percent;
         }
+        #endregion
 
-
-        #region Wave
+        #region WAVE
         public void SetWaveImage(Span<Sprite> imageList)
         {
             for (int i = 0; i < imageList.Length; ++i)
@@ -224,7 +239,7 @@ namespace Kbh
 
         #endregion
 
-        #region AirCraftPositionVisual
+        #region AIRCRAFT_POSITION_VISUAL
         public void EnableAirCraftPositionVisual(Span<int> exceptIdxArr)
         {
             if (_aircraftPositionFadeSeq != null && _aircraftPositionFadeSeq.active)
@@ -267,6 +282,7 @@ namespace Kbh
                 .Append(_bossWarningUI.DOFade(0, _bossWarningUIFadeTime).SetEase(_bossWarningUIFadeEase));
         }
 
-}
 
+    }
+    
 }
