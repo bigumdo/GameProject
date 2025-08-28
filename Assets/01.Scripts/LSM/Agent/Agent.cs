@@ -1,3 +1,4 @@
+using BGD.Agents.Enemies;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ namespace BGD.Agents
 {
     public class Agent : MonoBehaviour
     {
+        public Action<Agent> OnDeadAction;
+
         protected Dictionary<Type, IAgentComponent> _components;
 
         protected virtual void Awake()

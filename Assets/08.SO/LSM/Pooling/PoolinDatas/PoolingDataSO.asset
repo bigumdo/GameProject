@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80482ec3548bd341a9a4ca014842c09, type: 3}
   m_Name: PoolingDataSO
   m_EditorClassIdentifier: 
-  typeName: 
-  prefabObject: {fileID: 0}
-  poolingSettingCnt: 0
+  typeName: Enemy
+  prefabObject: {fileID: 5850220631200092610, guid: fcb54fba2b51d0648955c51a3fcfdcf3, type: 3}
+  poolingSettingCnt: 30

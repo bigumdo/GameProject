@@ -1,6 +1,7 @@
 using BGD.Agents;
 using BGD.FSM;
 using BGD.ObjectPool;
+using System;
 using UnityEngine;
 
 namespace BGD.Agents.Enemies
@@ -43,9 +44,19 @@ namespace BGD.Agents.Enemies
             
         }
 
+        public virtual void SetEnemy()
+        {
+
+        }
+
         public void ResetObj()
         {
-            throw new System.NotImplementedException();
+            
+        }
+
+        public void Dead()
+        {
+            OnDeadAction?.Invoke(this);
         }
     }
 }
