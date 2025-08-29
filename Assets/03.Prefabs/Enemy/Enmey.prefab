@@ -350,6 +350,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _statDatas:
   - statName: Speed
-    _baseValue: 3
+    _baseValue: 15
     _maxValue: 100
     _minValue: 0

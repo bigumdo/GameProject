@@ -1,3 +1,5 @@
+using BGD.Agents.Enemies;
+using BGD.ObjectPool;
 using UnityEngine;
 
 namespace BGD.Agents
@@ -6,22 +8,25 @@ namespace BGD.Agents
     {
         public float _maxhealth;
 
-        private float _currentHealth;
-        private Agent _agent;
-        private AgentStat _agnetStat;
+        protected float _currentHealth;
+        protected Agent _agent;
+        protected AgentStat _agnetStat;
 
 
-        public void Initialize(Agent agent)
+        public virtual void Initialize(Agent agent)
         {
             _agnetStat = agent.Getcompo<AgentStat>();
             _currentHealth = _maxhealth = _agnetStat.GetStat("Hp").Value;
         }
 
-        public void ApplyDamage(float damage)
+        public virtual void ApplyDamage(float damage)
         {
             _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, _maxhealth);
             if (_currentHealth <= 0)
+            {
                 _agent.OnDeadAction?.Invoke(_agent);
+                //PoolingManager.Instance.Push(_agent);
+            }
         }
     }
 }

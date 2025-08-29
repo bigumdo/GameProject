@@ -8,9 +8,9 @@ namespace BGD.Agents.Enemies
 {
     public class Enemy : Agent, IPoolable
     {
-
         [SerializeField]private AgentStateListSO _states;
         private StateMachine _stateMachine;
+        private AgentHealth _health;
 
         [field:SerializeField] public string type { get; set; }
 
@@ -20,6 +20,7 @@ namespace BGD.Agents.Enemies
         {
             base.InitComponent();
             _stateMachine = new StateMachine(this, _states);
+            _health = Getcompo<AgentHealth>();
         }
 
         protected override void AfterInitComponent()
@@ -41,7 +42,10 @@ namespace BGD.Agents.Enemies
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            
+            if (collision.gameObject.layer == /*LayerMask.NameToLayer("Wall")*/7)
+            {
+                _health.ApplyDamage(1000000000);
+            }
         }
 
         public virtual void SetEnemy()
@@ -52,11 +56,6 @@ namespace BGD.Agents.Enemies
         public void ResetObj()
         {
             
-        }
-
-        public void Dead()
-        {
-            OnDeadAction?.Invoke(this);
         }
     }
 }
