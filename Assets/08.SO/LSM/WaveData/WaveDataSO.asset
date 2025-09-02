@@ -14,5 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveDatas:
   - enemyName: Enemy
+    startDelay: 0
     wavePoint: 1
     spawnCount: 10
+    spawnDelay: 0
+  - enemyName: Enemy
+    startDelay: 1
+    wavePoint: 2
+    spawnCount: 5
+    spawnDelay: 0
+  - enemyName: Enemy
+    startDelay: 1.5
+    wavePoint: 4
+    spawnCount: 5
+    spawnDelay: 0
+  nextWaveDelayTime: 2

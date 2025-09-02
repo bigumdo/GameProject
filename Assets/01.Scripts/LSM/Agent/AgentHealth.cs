@@ -6,15 +6,14 @@ namespace BGD.Agents
 {
     public class AgentHealth : MonoBehaviour, IAgentComponent
     {
-        public float _maxhealth;
-
+        protected float _maxhealth;
         protected float _currentHealth;
         protected Agent _agent;
         protected AgentStat _agnetStat;
 
-
         public virtual void Initialize(Agent agent)
         {
+            _agent = agent;
             _agnetStat = agent.Getcompo<AgentStat>();
             _currentHealth = _maxhealth = _agnetStat.GetStat("Hp").Value;
         }
@@ -25,7 +24,7 @@ namespace BGD.Agents
             if (_currentHealth <= 0)
             {
                 _agent.OnDeadAction?.Invoke(_agent);
-                //PoolingManager.Instance.Push(_agent);
+                PoolingManager.Instance.Push(_agent as IPoolable);
             }
         }
     }

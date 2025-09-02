@@ -37,24 +37,33 @@ namespace BGD.Core
             {
                 yield return new WaitUntil(() => IsNextWave);
 
-                for (int i =0;i<wave.waveDatas.Count;++i)
+                _waveCount++;
+
+                for (int i = 0; i < wave.waveDatas.Count; ++i)
                 {
-                    for(int j = 0;j < wave.waveDatas[i].spawnCount;++j)
-                    {
-                        Enemy enemy = PoolingManager.Instance.Pop(wave.waveDatas[i].enemyName) as Enemy;
-                        _currentWaveEnemy.Add(enemy);
-                        enemy.transform.position = _spawnPoints[wave.waveDatas[i].wavePoint + 1].position;
-                        enemy.OnDeadAction += EnemyRemoveHandle;
-                        yield return new WaitForSeconds(0.1f);
-                    }
+                    StartCoroutine(WaveSpawn(wave.waveDatas[i]));
                 }
 
-                _waveCount++;
+                yield return new WaitUntil(() => _currentWaveEnemy.Count == 0);
                 if(_waveCount % 3 ==0)
                     IsNextWave = false;
-                yield return new WaitUntil(() => _currentWaveEnemy.Count == 0);
             }
             yield return null;
+        }
+
+        public IEnumerator WaveSpawn(WaveObject waveObj)
+        {
+            if(waveObj.startDelay > 0)
+                yield return new WaitForSeconds(waveObj.startDelay);
+
+            for (int j = 0; j < waveObj.spawnCount; ++j)
+            {
+                Enemy enemy = PoolingManager.Instance.Pop(waveObj.enemyName) as Enemy;
+                _currentWaveEnemy.Add(enemy);
+                enemy.transform.position = _spawnPoints[waveObj.wavePoint + 1].position;
+                enemy.OnDeadAction += EnemyRemoveHandle;
+                yield return new WaitForSeconds(0.1f);
+            }
         }
 
         private void EnemyRemoveHandle(Agent agent)
