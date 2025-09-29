@@ -11,8 +11,8 @@ TagManager:
   - 
   - Water
   - UI
-  - PlayerUnit
-  - Walll
+  - 
+  - 
   - 
   - 
   - 
@@ -38,8 +38,17 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackUI
+    uniqueID: 1243791837
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Game
+    uniqueID: 2229143521
+    locked: 0
+  - name: FrontUI
+    uniqueID: 1274685545
     locked: 0
   m_RenderingLayers:
   - Default
