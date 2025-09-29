@@ -42,7 +42,7 @@ namespace BGD.Agents.Enemies
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.layer == /*LayerMask.NameToLayer("Wall")*/7)
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
             {
                 _health.ApplyDamage(1000000000);
             }
